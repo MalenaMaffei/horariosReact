@@ -238,78 +238,6 @@ button:active {
   display: none;
 }
 
-.modalDialog {
-	position: fixed;
-	font-family: Arial, Helvetica, sans-serif;
-	top: 0;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	background: rgba(0,0,0,0.8);
-	z-index: 99999;
-	opacity:0;
-	-webkit-transition: opacity 400ms ease-in;
-	-moz-transition: opacity 400ms ease-in;
-	transition: opacity 400ms ease-in;
-	pointer-events: none;
-}
-.modalDialog:target {
-	opacity:1;
-	pointer-events: auto;
-}
-
-.modalDialog > div {
-    max-width: 950px;
-	position: relative;
-	margin: 10% auto;
-	/*padding: 5px 8px 13px 8px;*/
-    padding-bottom: 13px;
-	border-radius: 10px;
-	background: #fff;
-	background: -moz-linear-gradient(#fff, #dedede);
-	background: -webkit-linear-gradient(#fff, #dedede);
-	background: -o-linear-gradient(#fff, #dedede);
-}
-
-/*.close {
-    background: #8E93D8;
-	color: #FFFFFF;
-	line-height: 25px;
-	position: absolute;
-	text-align: center;
-	text-decoration: none;
-	font-weight: bold;
-	-webkit-border-radius: 12px;
-	-moz-border-radius: 12px;
-	border-radius: 12px;
-	-moz-box-shadow: 1px 1px 3px #000;
-	-webkit-box-shadow: 1px 1px 3px #000;
-	box-shadow: 1px 1px 3px #000;
-
-}*/
-
-#botonEquis {
-    /*right: -12px;
-    top: -10px;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    -webkit-border-radius: 40px;
-    -moz-border-radius: 40px;
-    border-radius: 40px;
-    z-index: 1;*/
-}
-
-#agregarRecorrido {
-    /*pointer-events: none;*/
-    /*top: 282px;
-    width: 90px;
-    left: 310px;*/
-}
-
-/*.close:hover { background: #00d9ff; }*/
-/*#agregarRecorrido:hover { background: #00d9ff; }*/
-
 .superHeader span {
   display: inline-block;
   text-align: center;
@@ -360,3 +288,87 @@ button:active {
   font-size: 20px;
   margin-bottom: 50px
 }
+
+/*CSS del mapa*/
+#mapa {
+
+    background: url("./imgs/mapatren2Chico60.jpeg");
+    width: 950px;
+    height: 267px;
+    position: relative;
+    border-radius: 10px;
+}
+.ramal {
+    position: absolute;;
+    margin: 0;
+}
+
+#eze {
+    /*background-color: rgba(255, 0, 0, 0.5);*/
+    width: 326px;
+    height: 33px;
+    /*position: relative;*/
+    top: 81px;
+    left: 21px;
+}
+
+#adro {
+    /*background-color: rgba(255, 0, 0, 0.5);*/
+    width: 326px;
+    height: 33px;
+    /*position: relative;*/
+    top: 156px;
+    left: 20.2px;
+}
+
+#consti {
+    width: 530px;
+    height: 31px;
+    /*position: relative;*/
+    top: 157px;
+    left: 371.7px;
+    /*background-color: rgba(255, 0, 0, 0.5);*/
+}
+
+#consti .cuadrado{
+    width: 31px;
+    margin-right: 27.5px;
+    /*height: 28px;*/
+}
+
+#consti .circulo {
+    height: 30.2px;
+}
+
+.cuadrado:last-child{
+    margin-right: 0;
+}
+#consti .cuadrado:last-child{
+    margin-right: 0;
+    margin-left: -1px;
+    position: relative;
+    top: -7px;
+    width: 58px;
+    height: 58px;
+    border-radius: 50px;
+}
+
+#consti .cuadrado:first-child{
+    margin-right: 27.5px;
+}
+
+.circulo {
+    border-radius: 20px;
+    width: auto;
+    height: 33px;
+    /*background-color: rgba(0, 255, 0, 0.5);*/
+
+    position: relative;
+    width: 32px;
+    height: 33px;
+    float: left;
+    margin-right: 26.7px;
+}
+
+.circulo:hover {
+background-color: rgba(0, 255, 0, 0.5);}

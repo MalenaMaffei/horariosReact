@@ -1,17 +1,24 @@
 import React, { Component } from 'react';
-import { Button, Header, Image, Modal } from 'semantic-ui-react';
+import { Button, Header, Image, Modal, Popup } from 'semantic-ui-react';
+import PlusButton from './PlusButton';
+import Mapa from './Mapa';
 
 class ModalMap extends Component{
   render(){
     return (
-      <Modal trigger={<Button>Show Modal</Button>}>
-        <Modal.Header>Select a Photo</Modal.Header>
-        <Modal.Content image>
-          <Modal.Description>
-            <Header>Default Profile Image</Header>
-            <p>Weve found the following gravatar image associated with your e-mail address.</p>
-            <p>Is it okay to use this photo?</p>
-          </Modal.Description>
+      <Modal trigger={<Button fluid icon='add'/>}>
+        <Modal.Header>Elegí las estaciones de origen y destino</Modal.Header>
+        <Modal.Content>
+            <Mapa />
+            <p>Origen: <span id="origen"></span></p>
+            <p>Destino: <span id="destino"></span></p>
+            <Modal.Actions>
+              <Button.Group>
+                <Button>Cancelar</Button>
+                <Button.Or />
+                <Button disabled positive>Agregar</Button>
+              </Button.Group>
+            </Modal.Actions>
         </Modal.Content>
       </Modal>
     );

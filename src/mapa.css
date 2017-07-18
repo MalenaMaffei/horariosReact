@@ -1,0 +1,82 @@
+#mapa {
+
+    background: url("mapatren2Chico60.jpeg");
+    width: 950px;
+    height: 267px;
+    position: relative;
+    border-radius: 10px;
+}
+.ramal {
+    position: absolute;;
+    margin: 0;
+}
+
+#eze {
+    /*background-color: rgba(255, 0, 0, 0.5);*/
+    width: 326px;
+    height: 33px;
+    /*position: relative;*/
+    top: 81px;
+    left: 21px;
+}
+
+#adro {
+    /*background-color: rgba(255, 0, 0, 0.5);*/
+    width: 326px;
+    height: 33px;
+    /*position: relative;*/
+    top: 156px;
+    left: 20.2px;
+}
+
+#consti {
+    width: 530px;
+    height: 31px;
+    /*position: relative;*/
+    top: 157px;
+    left: 371.7px;
+    /*background-color: rgba(255, 0, 0, 0.5);*/
+}
+
+#consti .cuadrado{
+    width: 31px;
+    margin-right: 27.5px;
+    /*height: 28px;*/
+}
+
+#consti .circulo {
+    height: 30.2px;
+}
+
+.cuadrado:last-child{
+    margin-right: 0;
+}
+#consti .cuadrado:last-child{
+    margin-right: 0;
+    margin-left: -1px;
+    position: relative;
+    top: -7px;
+    width: 58px;
+    height: 58px;
+    border-radius: 50px;
+}
+
+#consti .cuadrado:first-child{
+    margin-right: 27.5px;
+}
+
+.circulo {
+    border-radius: 20px;
+    width: auto;
+    height: 33px;
+    /*background-color: rgba(0, 255, 0, 0.5);*/
+
+    position: relative;
+    width: 32px;
+    height: 33px;
+    float: left;
+    margin-right: 26.7px;
+}
+
+.circulo:hover {
+background-color: rgba(0, 255, 0, 0.5);}
