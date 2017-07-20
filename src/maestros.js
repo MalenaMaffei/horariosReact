@@ -33,14 +33,18 @@ displayNames["TEMPERLEY"] = "TEMPERLEY";
 displayNames["TURDERA"] = "TURDERA";
 displayNames["YRIGOYEN"] = "H. YRIGOYEN";
 
-var ramalEzeiza = ["CONSTITUCION","YRIGOYEN","AVELLANEDA","GERLI","LANUS","ESCALADA","BANFIELD","LOMAS","TEMPERLEY","TURDERA","LLAVALLOL","GUILLON","RANDE","JAGUEL","EZEIZA"];
-var ramalGlew = ["CONSTITUCION","YRIGOYEN","AVELLANEDA","GERLI","LANUS","ESCALADA","BANFIELD","LOMAS","TEMPERLEY","ADROGUE","BURZACO","LONGCHAMPS","GLEW","GUERNICA","KORN"];
+export var estsEze = ["TURDERA","LLAVALLOL","GUILLON","GRANDE","JAGUEL","EZEIZA"].reverse();
+export var estsGlew = ["ADROGUE","BURZACO","LONGCHAMPS","GLEW","GUERNICA","KORN"].reverse();
+export var estsConst = ["CONSTITUCION","YRIGOYEN","AVELLANEDA","GERLI","LANUS","ESCALADA","BANFIELD","LOMAS","TEMPERLEY"].reverse();
+
+export var ramalEzeiza = ["CONSTITUCION","YRIGOYEN","AVELLANEDA","GERLI","LANUS","ESCALADA","BANFIELD","LOMAS","TEMPERLEY","TURDERA","LLAVALLOL","GUILLON","GRANDE","JAGUEL","EZEIZA"];
+export var ramalGlew = ["CONSTITUCION","YRIGOYEN","AVELLANEDA","GERLI","LANUS","ESCALADA","BANFIELD","LOMAS","TEMPERLEY","ADROGUE","BURZACO","LONGCHAMPS","GLEW","GUERNICA","KORN"];
 
 var dbNames = {};
 dbNames["eze"] = ramalEzeiza;
 dbNames["glew"] = ramalGlew;
 
-function getRamales(salida, llegada) {
+export function getRamales(salida, llegada) {
   var ramales = [];
   if (ramalEzeiza.indexOf(salida) != -1 && ramalEzeiza.indexOf(llegada) != -1) {
     ramales.push("eze");

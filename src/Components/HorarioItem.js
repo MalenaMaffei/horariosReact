@@ -3,6 +3,7 @@ import $ from 'jquery';
 import * as maestro from '../maestros.js';
 import * as aux from '../auxiliares.js';
 import HorarioFila from './HorarioFila';
+import { Button, Table, Icon } from 'semantic-ui-react'
 
 class HorarioItem extends Component{
     constructor(props){
@@ -50,6 +51,8 @@ class HorarioItem extends Component{
         var horariosVuelta = [];
 
         var recorridos = maestro.getRecorridos(ida, vuelta, dia);
+        console.log("lo qe devuelve recorridos");
+        console.log(recorridos);
 
         for (var i = 0; i < recorridos.length; i++) {
             var direccion = recorridos[i];
@@ -73,8 +76,6 @@ class HorarioItem extends Component{
     buscarTrenes(horarios, currentTime) {
         var nextTrain = aux.getNext(horarios, currentTime);
         let trenes = [];
-        // TODO: saque cant_headers porque por ahora solo hago ida
-        // for (var i = aux.CANT_HEADERS; i < aux.CANT_HEADERS+aux.CANT_TRENES; i++) {
         for (var i = 0; i < aux.CANT_TRENES; i++) {
             var salida = nextTrain[aux.SALIDA];
             var llegada = nextTrain[aux.LLEGADA];
@@ -131,33 +132,41 @@ class HorarioItem extends Component{
                 );
             });
         }
+        // var style = { backgroundColor: this.props.color !important};
         return (
             <span>
-              <table className="ui celled unstackable striped table">
-                <tbody>
-                    <tr>
-                        <th colSpan="3" scope="colgroup" className="superHeader">{this.props.horario.origen} - {this.props.horario.destino}
-                            <button className="ui icon button trash" onClick={this.deleteHorario.bind(this,this.props.horario.id)}>
-                                <i className="trash icon" aria-hidden="true"></i>
-                            </button>
-                        </th>
-                    </tr>
-                    <tr>
-                      <th>Sale en</th>
-                      <th>A las</th>
-                      <th>Llega</th>
-                    </tr>
-                    {trenes}
-                </tbody>
-              </table>
-              <div id="centeredmenu">
-                  <ul className="tab tabsHorarios">
-                      <li><a className="tabHorario">0:00 - 9:00</a></li>
-                      <li><a className="tabHorario">9:00 - 13:00</a></li>
-                      <li><a className="tabHorario">13:00 - 18:00</a></li>
-                      <li><a className="tabHorario">18:00 - 0:00</a></li>
-                  </ul>
-              </div>
+                <Table color={this.props.color} celled inverted unstackable striped>
+                    <Table.Header >
+                        <Table.Row>
+                            <Table.HeaderCell className="center aligned" colSpan="3" scope="colgroup">
+                              {this.props.horario.origen} - {this.props.horario.destino}
+                             <button className="ui icon button trash" onClick={this.deleteHorario.bind(this,this.props.horario.id)}>
+                                 <i className="trash icon" aria-hidden="true"></i>
+                             </button>
+                            </Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+
+                    <Table.Header >
+                        <Table.Row>
+                            <Table.HeaderCell>Sale en</Table.HeaderCell>
+                            <Table.HeaderCell>A las</Table.HeaderCell>
+                            <Table.HeaderCell>Llega</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+
+                    <Table.Body>
+                        {trenes}
+                    </Table.Body>
+                </Table>
+                <div id="centeredmenu">
+                    <ul className="tab tabsHorarios">
+                    <li><a className="tabHorario">0:00 - 9:00</a></li>
+                    <li><a className="tabHorario">9:00 - 13:00</a></li>
+                    <li><a className="tabHorario">13:00 - 18:00</a></li>
+                    <li><a className="tabHorario">18:00 - 0:00</a></li>
+                    </ul>
+                </div>
             </span>
         );
     }

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Table } from 'semantic-ui-react'
 
 class HorarioFila extends Component{
     getTimeRemaining(ahora,salida){
@@ -14,8 +15,8 @@ class HorarioFila extends Component{
             var horas = Math.floor(resultado/60);
             var minutos = (24*60 - (minAhora - minSalida))%60;
             resultado = horas + ((horas == 1)?(" hora "):(" horas ")) + minutos + (( minutos == 1)?( " minuto"):(" minutos"));
-            var style = { color: 'red'};
-            return <td style={style}>{resultado} <i className="hourglass start icon"></i></td>;
+            // var style = { color: 'red'};
+            return <Table.Cell error>{resultado} <i className="hourglass start icon"></i></Table.Cell>;
             // TODO AGREGAR ESTILO ROJO
         } else {
             var minutos = resultado;
@@ -23,20 +24,20 @@ class HorarioFila extends Component{
             if (minutos < 10){
                 // resultado = resultado + ((minutos < 10)?("! &#127939;"):(""));
                 // TODO SACAR ESTE ICONO Y PONER DE SEMANTIC
-                return <td>{resultado} &#127939; </td>
+                return <Table.Cell>{resultado} &#127939; </Table.Cell>
             }
-            return <td>{resultado}</td>;
+            return <Table.Cell>{resultado}</Table.Cell>;
         }
     }
 
     render(){
         let tiempo = this.getTimeRemaining(this.props.ahora, this.props.salida);
         return (
-            <tr>
-                {tiempo}
-                <td>{this.props.salida}</td>
-                <td>{this.props.llegada}</td>
-            </tr>
+            <Table.Row>
+              {tiempo}
+              <Table.Cell>{this.props.salida}</Table.Cell>
+              <Table.Cell>{this.props.llegada}</Table.Cell>
+            </Table.Row>
         );
     }
 }

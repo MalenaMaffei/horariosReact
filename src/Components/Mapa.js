@@ -1,35 +1,42 @@
 import React, { Component } from 'react';
+import Estacion from './Estacion';
+import * as maestro from '../maestros.js';
 
 class Mapa extends Component{
+    constructor(props){
+        super(props);
+        this.state = {origen: '', destino: ''};
+        this.handleEstacionClick = this.handleEstacionClick.bind(this);
+    }
+
+    handleEstacionClick(estacion){
+        this.props.onEstacion(estacion);
+    }
+
     render(){
+        console.log(" el estado: " + this.state.origen + " " + this.state.destino);
+        let eze;
+        eze = maestro.estsEze.map(estacion => {
+            return(<Estacion id={estacion} onClick={this.handleEstacionClick} key={estacion}/>)
+        });
+        let glew;
+        glew = maestro.estsGlew.map(estacion => {
+            return(<Estacion id={estacion} onClick={this.handleEstacionClick} key={estacion}/>)
+        });
+        let consti;
+        consti = maestro.estsConst.map(estacion => {
+            return(<Estacion id={estacion} onClick={this.handleEstacionClick} key={estacion}/>)
+        });
         return(
             <div id="mapa">
                 <div className="ramal" id="eze">
-                    <div className="cuadrado circulo" id="EZEIZA"></div>
-                    <div className="cuadrado circulo" id="JAGUEL"></div>
-                    <div className="cuadrado circulo" id="GRANDE"></div>
-                    <div className="cuadrado circulo" id="GUILLON"></div>
-                    <div className="cuadrado circulo" id="LLAVALLOL"></div>
-                    <div className="cuadrado circulo" id="TURDERA"></div>
+                    {eze}
                 </div>
                 <div className="ramal" id="adro">
-                    <div className="cuadrado circulo" id="KORN"></div>
-                    <div className="cuadrado circulo" id="GUERNICA"></div>
-                    <div className="cuadrado circulo" id="GLEW"></div>
-                    <div className="cuadrado circulo" id="LONGCHAMPS"></div>
-                    <div className="cuadrado circulo" id="BURZACO"></div>
-                    <div className="cuadrado circulo" id="ADROGUE"></div>
+                    {glew}
                 </div>
                 <div className="ramal" id="consti">
-                    <div className="cuadrado circulo" id="TEMPERLEY"></div>
-                    <div className="cuadrado circulo" id="LOMAS"></div>
-                    <div className="cuadrado circulo" id="BANFIELD"></div>
-                    <div className="cuadrado circulo" id="ESCALADA"></div>
-                    <div className="cuadrado circulo" id="LANUS"></div>
-                    <div className="cuadrado circulo" id="GERLI"></div>
-                    <div className="cuadrado circulo" id="AVELLANEDA"></div>
-                    <div className="cuadrado circulo" id="YRIGOYEN"></div>
-                    <div className="cuadrado circulo" id="CONSTITUCION"></div>
+                    {consti}
                 </div>
             </div>
         );

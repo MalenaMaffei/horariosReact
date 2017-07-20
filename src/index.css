@@ -8,6 +8,14 @@ body {
     margin: 0 auto;
 }
 
+a.item{
+    width: 50%;
+    background-color: "white" !important;
+}
+
+a.item.active{
+    0background-color: "#228BE2" !important;
+}
 
 table {
     font-family: arial, sans-serif;
@@ -39,7 +47,7 @@ tr:nth-child(even) {
 
 #current {
     font-size: 70px;
-    font-family: courier;
+    0font-family: courier;
     text-align: center;
     margin: 30px;
 }
@@ -135,11 +143,11 @@ ul.tab li a:hover {
 }
 /* Style the tab content */
 .tabcontent {
-    display: none;
+    /*display: none;
     padding: 6px 12px;
     border: 1px solid #ccc;
-    border-top: none;
-    background-color: rgba(255, 255, 255, 0.5);
+    border-top: none;*/
+    background-color: rgba(255, 255, 255, 0.5) !important;
 }
 
 #centeredmenu{
@@ -275,44 +283,6 @@ button:active {
 	background: -o-linear-gradient(#fff, #dedede);
 }
 
-/*.close {
-    background: #8E93D8;
-	color: #FFFFFF;
-	line-height: 25px;
-	position: absolute;
-	text-align: center;
-	text-decoration: none;
-	font-weight: bold;
-	-webkit-border-radius: 12px;
-	-moz-border-radius: 12px;
-	border-radius: 12px;
-	-moz-box-shadow: 1px 1px 3px #000;
-	-webkit-box-shadow: 1px 1px 3px #000;
-	box-shadow: 1px 1px 3px #000;
-
-}*/
-
-#botonEquis {
-    /*right: -12px;
-    top: -10px;
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    -webkit-border-radius: 40px;
-    -moz-border-radius: 40px;
-    border-radius: 40px;
-    z-index: 1;*/
-}
-
-#agregarRecorrido {
-    /*pointer-events: none;*/
-    /*top: 282px;
-    width: 90px;
-    left: 310px;*/
-}
-
-/*.close:hover { background: #00d9ff; }*/
-/*#agregarRecorrido:hover { background: #00d9ff; }*/
 
 .superHeader span {
   display: inline-block;

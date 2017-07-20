@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
+import { Button, Popup } from 'semantic-ui-react';
 import logo from './logo.svg';
 import './App.css';
-import PlusButton from './Components/PlusButton';
 import ModalMap from './Components/ModalMap';
 import Horarios from './Components/Horarios';
 import Reloj from './Components/Reloj';
 import uuid from 'uuid';
+
+// TODO tengo que ver como hacer para solo tener horarios origenDestino concat y ver si no puedo directamente
+// iterar el lcoalstorage o no se
+// TODO: Revisar Delete que no estaria funcionando.
 class App extends Component {
   constructor(props){
     super(props);
@@ -17,8 +21,8 @@ class App extends Component {
           var recorridosGuardados = localStorage.recorridos;
           for (var nro = 1; nro <= recorridosGuardados; nro++) {
             horarios.push({
-              origen: localStorage['seccion'+nro+'Ida'],
-              destino: localStorage['seccion'+nro+'Vuelta'],
+              origen: localStorage[nro+'Ida'],
+              destino: localStorage[nro+'Vuelta'],
               id: uuid.v4()
             });
         }
@@ -27,7 +31,6 @@ class App extends Component {
 
     this.state = {
       showModal: false,
-      // horarios: [{destino: "consti", origen: "adrogue", id: 1}, {destino: "consti", origen: "turde", id: 2}]
       horarios: horarios,
       cantHorarios: recorridosGuardados,
       hora: this.getHora()
@@ -35,28 +38,43 @@ class App extends Component {
   }
 
   componentDidMount() {
-      // TODO ojo, ver como sincronizar bien..ahora se actualiza c/5 segundos
       let interval = 5*1000;
       this.intervalId = setInterval(this.timer.bind(this), interval);
   }
 
   handlePlusButton(){
-    console.log("holi");
     this.setState({showModal: true});
   }
 
   handleDeleteHorario(id){
+    console.log("voy a borrar a alguien");
     let horarios = this.state.horarios;
     let index = horarios.findIndex(x => x.id === id);
     horarios.splice(index, 1);
     this.setState({horarios: horarios});
+    // TODO tengo que ver como carajo borrar esto
   }
 
-  // handleTime(time){
-  //   //  TODO aca actualizar los horarios, no se como jaja
-  //   console.log("Pasó un minuto y la app se entero, tiempo: "+time);
-  //   this.setState({hora: time});
-  // }
+  handleNuevoRecorrido(origen, destino){
+      let nuevoHorarios = this.state.horarios;
+      nuevoHorarios.push({
+          origen: origen,
+          destino: destino,
+          id: uuid.v4()
+      });
+      let cantHorarios = this.state.recorridos;
+      this.setState({
+        horarios: nuevoHorarios,
+        cantHorarios: cantHorarios++,
+        showModal: false
+      });
+      if(typeof(Storage) !== "undefined") {
+        localStorage.recorridos++;
+        var nro = localStorage.recorridos;
+        localStorage[nro+'Ida'] = origen;
+        localStorage[nro+'Vuelta'] = destino;
+      }
+  }
 
   getHora(){
       var date = new Date();
@@ -66,14 +84,18 @@ class App extends Component {
       return currentTime;
   }
 
-  timer() {
-      this.setState({
-          hora: this.getHora()
-      });
+  closeModal(){
+    this.setState({
+      showModal: false
+    });
   }
 
-  shouldComponentUpdate(nextProps, nextState){
-      return nextState.hora !== this.state.hora;
+  timer() {
+      if(this.getHora() != this.state.hora){
+        this.setState({
+            hora: this.getHora()
+        });
+      }
   }
 
   render() {
@@ -81,7 +103,11 @@ class App extends Component {
       <div className="ui container">
         <Reloj hora={this.state.hora}/>
         <Horarios horarios={this.state.horarios} onDelete={this.handleDeleteHorario.bind(this)} hora={this.state.hora}/>
-        <ModalMap/>
+        <Popup
+          trigger={<Button fluid icon='add' onClick={this.handlePlusButton.bind(this)}/>}
+          content='Agregá un nuevo recorrido'
+        />
+        <ModalMap onNuevo={this.handleNuevoRecorrido.bind(this)} open={this.state.showModal} close={this.closeModal.bind(this)}/>
       </div>
     );
   }
