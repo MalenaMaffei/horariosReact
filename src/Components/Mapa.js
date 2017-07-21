@@ -10,7 +10,9 @@ class Mapa extends Component{
     }
 
     handleEstacionClick(estacion){
-        this.props.onEstacion(estacion);
+        var active = this.props.onEstacion(estacion);
+        console.log("MApa dice de la seleccion: " + active);
+        return active;
     }
 
     render(){

@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import HorarioItem from './HorarioItem';
-import $ from 'jquery';
-import * as maestro from '../maestros.js';
-import * as aux from '../auxiliares.js';
 import { Tab } from 'semantic-ui-react'
 
 const colors = [

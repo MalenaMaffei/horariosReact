@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Header, Image, Modal, Popup } from 'semantic-ui-react';
-import PlusButton from './PlusButton';
+import { Button, Header, Modal } from 'semantic-ui-react';
 import Mapa from './Mapa';
 import * as maestro from '../maestros.js';
 
@@ -12,17 +11,20 @@ class ModalMap extends Component{
     }
 
     onEstacionPick(estacion){
-         if (this.state.origen == estacion) {
+         if (this.state.origen === estacion) {
              this.setState({origen: ""});
-        } else if (this.state.destino == estacion) {
+        } else if (this.state.destino === estacion) {
             this.setState({destino: ""});
-        } else if (this.state.origen == "") {
+        } else if (this.state.origen === "") {
             this.setState({origen: estacion});
-        } else if (this.state.destino == "") {
+        } else if (this.state.destino === "") {
             if (maestro.getRamales(this.state.origen, estacion).length !== 0){
                 this.setState({destino: estacion});
+            } else {
+                return false;
             }
         }
+		return true;
     }
 
 	handleAceptar(){
@@ -45,7 +47,7 @@ class ModalMap extends Component{
 						<Button.Group>
 							<Button onClick={this.handleCancelar.bind(this)}>Cancelar</Button>
 							<Button.Or />
-							<Button disabled={this.state.origen == "" || this.state.destino == ""}
+							<Button disabled={this.state.origen === "" || this.state.destino === ""}
 									onClick={this.handleAceptar.bind(this)}
 									positive>Agregar</Button>
 						</Button.Group>
