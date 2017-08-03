@@ -370,5 +370,9 @@ button:active {
     margin-right: 26.7px;
 }
 
+.selected {
+    background-color: rgba(0, 255, 0, 0.5);
+}
+
 .circulo:hover {
 background-color: rgba(0, 255, 0, 0.5);}

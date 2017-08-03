@@ -21,6 +21,7 @@ class App extends Component {
           var recorridosGuardados = localStorage.recorridos;
           for (var nro = 1; nro <= recorridosGuardados; nro++) {
             horarios.push({
+                // TODO por aca tengo que comprobar que existan esos, si no, pongo los recorridos en 0 y vuelvo a empezar
               origen: localStorage[nro+'Ida'],
               destino: localStorage[nro+'Vuelta'],
               id: uuid.v4()
