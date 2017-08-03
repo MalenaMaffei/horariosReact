@@ -1,8 +1,19 @@
-body {
-    background: url("./imgs/tileable_wood_planks_texture.jpg");
-    font-family: helvetica;
-}
 
+/*body {
+    background: url("./imgs/tileable_wood_planks_texture.jpg");
+    font-family: 'Roboto', sans-serif;
+}*/
+
+/*#current {
+    font-size: 70px;
+    0font-family: courier;
+    text-align: center;
+    margin: 30px;
+}
+h2 {
+    font-size: 250%;
+}*/
+/*
 #contenido {
     max-width: 1500px;
     margin: 0 auto;
@@ -45,17 +56,8 @@ tr:nth-child(even) {
 .header2 tr th{background-color: #8E93D8;}
 .header1 tr th{background-color: #83D8AF;}
 
-#current {
-    font-size: 70px;
-    0font-family: courier;
-    text-align: center;
-    margin: 30px;
-}
-h2 {
-    font-size: 250%;
-}
 
-/* Style the list */
+
 ul.tab {
     list-style-type: none;
     margin: 0;
@@ -68,7 +70,6 @@ ul.tab {
 .tablaHorarios{
     margin-top: 8px;
 }
-/* Float the list items side by side */
 .tab.tabsHorarios {
     border-bottom: 0;
     border-right: 0;
@@ -112,7 +113,6 @@ ul.tab li {float: left;
 width: 50%;
 }
 
-/* Style the links inside the list items */
 ul.tab li a {
     display: inline-block;
     color: black;
@@ -126,14 +126,12 @@ ul.tab li a {
 span.flecha {
     visibility: hidden;
 }
-/* Change background color of links on hover */
 ul.tab li a:hover {
     background-color: #ddd;
     background: rgba(34, 139, 226, 0.62);
 }
 
 
-/* Create an active/current tablink class */
 .active {
     background: #228BE2;
 }
@@ -141,12 +139,8 @@ ul.tab li a:hover {
 .active span.flecha{
     visibility: visible;
 }
-/* Style the tab content */
 .tabcontent {
-    /*display: none;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;*/
+
     background-color: rgba(255, 255, 255, 0.5) !important;
 }
 
@@ -274,7 +268,6 @@ button:active {
     max-width: 950px;
 	position: relative;
 	margin: 10% auto;
-	/*padding: 5px 8px 13px 8px;*/
     padding-bottom: 13px;
 	border-radius: 10px;
 	background: #fff;
@@ -310,7 +303,6 @@ button:active {
     top: 9.5px;
 }
 
-/*front page*/
 
 .showcase{
   height: 600px;
@@ -320,7 +312,6 @@ button:active {
   margin-bottom: 30px;
   color: #fff;
   background: #333;
-  /*background: url('../img/showcase.jpg') no-repeat center center;*/
 
 }
 
@@ -333,4 +324,4 @@ button:active {
 .showcase p{
   font-size: 20px;
   margin-bottom: 50px
-}
+}*/

@@ -3,8 +3,15 @@ import $ from 'jquery';
 import * as maestro from '../maestros.js';
 import * as aux from '../auxiliares.js';
 import HorarioFila from './HorarioFila';
-import { Button, Table, Icon } from 'semantic-ui-react'
-
+// import { Table, Icon } from 'semantic-ui-react'
+import {
+  Table,
+  TableBody,
+  TableHeader,
+  TableHeaderColumn,
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table';
 class HorarioItem extends Component {
     constructor(props) {
         super(props);
@@ -19,6 +26,8 @@ class HorarioItem extends Component {
         this.traerDeDB = this.traerDeDB.bind(this);
         this.ajaxSuccess = this.ajaxSuccess.bind(this);
         this.buscarTrenes = this.buscarTrenes.bind(this);
+        console.log("el indice qe me viene al comienzo: ");
+        console.log(this.props.direccion);
     }
 
     componentDidMount() {
@@ -75,6 +84,9 @@ class HorarioItem extends Component {
         console.log("entro al puto buscar trenes");
         console.log(horarios);
         console.log(currentTime);
+        if(horarios.length < 1){
+            return;
+        }
         var nextTrain = aux.getNext(horarios, currentTime);
         let trenes = [];
         for (var i = 0; i < aux.CANT_TRENES; i++) {
@@ -103,8 +115,8 @@ class HorarioItem extends Component {
     }
 
     ajaxSuccess(data) {
-        // console.log("lo que recibo de ajax");
-        // console.log(data);
+        console.log("lo que recibo de ajax");
+        console.log(data);
         // console.log("puedo acceder a mi estado?");
         // console.log(this.state);
         let desde = data[maestro.SALIDA];
@@ -128,20 +140,16 @@ class HorarioItem extends Component {
         misHorarios = misHorarios.concat(horariosVuelta);
         misHorarios = misHorarios.sort(aux.ordenarArraysDeHorarios);
         this.setState({ horariosVuelta: misHorarios });
-        this.buscarTrenes(misHorarios, this.props.hora);
+        // this.buscarTrenes(misHorarios, this.props.hora);
     }
 
     traerDeDB(desde, hasta, recorrido) {
-        // TODO editar accederdb porque recorrido solo no me basta, necesito la tabla de vuelta tambien
-        // var mydata = [];
         var ajaxSuccess = this.ajaxSuccess;
         $.ajax({
             data: { "desde": desde, "hasta": hasta, "tabla": recorrido },
             // TODO cambiar esto por solo accederdb en produccion
-            url: 'http://horarios.webutu.com/accederdb.php',
+            url: 'http://horarios.webutu.com/accederdbReact.php',
             // url: 'accederdb.php',
-            // TODO ver como que deje de ser async
-            // async: false,
             dataType: 'json',
             success: ajaxSuccess,
             error: function(jqXHR, textStatus, errorThrown) {
@@ -171,8 +179,25 @@ class HorarioItem extends Component {
         }
         // var style = { backgroundColor: this.props.color !important};
         return (
-        <span>
-            <Table color = { this.props.color } celled inverted unstackable striped>
+        <div>
+			<Table>
+				<TableHeader displaySelectAll={false}>
+					<TableRow>
+		              <TableHeaderColumn colSpan="3" tooltip="Super Header" style={{textAlign: 'center'}}>
+		                { this.props.horario.origen } - {this.props.horario.destino }
+		              </TableHeaderColumn>
+		            </TableRow>
+					<TableRow>
+						<TableHeaderColumn>Sale en</TableHeaderColumn>
+						<TableHeaderColumn>A las</TableHeaderColumn>
+						<TableHeaderColumn>Llega</TableHeaderColumn>
+					</TableRow>
+				</TableHeader>
+				<TableBody>
+					{trenes}
+				</TableBody>
+			</Table>
+            {/*<Table color = { this.props.color } celled inverted unstackable striped>
                 <Table.Header>
                     <Table.Row>
                         <Table.HeaderCell className = "center aligned" colSpan = "3" scope = "colgroup">
@@ -193,7 +218,7 @@ class HorarioItem extends Component {
                 </Table.Header>
 
                 <Table.Body> { trenes } </Table.Body>
-            </Table>
+            </Table>*/}
             {/*<div id = "centeredmenu" >
                 <ul className = "tab tabsHorarios" >
                     <li > < a className = "tabHorario" > 0: 00 - 9: 00 </a></li>
@@ -202,7 +227,7 @@ class HorarioItem extends Component {
                     <li > < a className = "tabHorario" > 18: 00 - 0: 00 </a></li>
                 </ul>
             </div>*/}
-        </span>
+        </div>
         );
     }
 }

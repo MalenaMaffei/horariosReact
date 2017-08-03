@@ -1,4 +1,11 @@
 
+body {
+    background: url("./imgs/tileable_wood_planks_texture.jpg");
+    font-family: 'Roboto', sans-serif;
+}
+
+
+/*
 #contenido {
     max-width: 1500px;
     margin: 0 auto;
@@ -43,7 +50,6 @@ h2 {
     font-size: 250%;
 }
 
-/* Style the list */
 ul.tab {
     list-style-type: none;
     margin: 0;
@@ -56,7 +62,6 @@ ul.tab {
 .tablaHorarios{
     margin-top: 8px;
 }
-/* Float the list items side by side */
 .tab.tabsHorarios {
     border-bottom: 0;
     border-right: 0;
@@ -100,7 +105,6 @@ ul.tab li {float: left;
 width: 50%;
 }
 
-/* Style the links inside the list items */
 ul.tab li a {
     display: inline-block;
     color: black;
@@ -114,14 +118,12 @@ ul.tab li a {
 span.flecha {
     visibility: hidden;
 }
-/* Change background color of links on hover */
 ul.tab li a:hover {
     background-color: #ddd;
     background: rgba(34, 139, 226, 0.62);
 }
 
 
-/* Create an active/current tablink class */
 .active {
     background: #228BE2;
 }
@@ -129,12 +131,8 @@ ul.tab li a:hover {
 .active span.flecha{
     visibility: visible;
 }
-/* Style the tab content */
 .tabcontent {
-    /*display: none;
-    padding: 6px 12px;
-    border: 1px solid #ccc;
-    border-top: none;*/
+
     background-color: rgba(255, 255, 255, 0.5);
 }
 
@@ -264,7 +262,6 @@ button:active {
     top: 9.5px;
 }
 
-/*front page*/
 
 .showcase{
   height: 600px;
@@ -274,7 +271,6 @@ button:active {
   margin-bottom: 30px;
   color: #fff;
   background: #333;
-  /*background: url('../img/showcase.jpg') no-repeat center center;*/
 
 }
 
@@ -288,8 +284,7 @@ button:active {
   font-size: 20px;
   margin-bottom: 50px
 }
-
-/*CSS del mapa*/
+*/
 #mapa {
 
     background: url("./imgs/mapatren2Chico60.jpeg");
@@ -304,19 +299,15 @@ button:active {
 }
 
 #eze {
-    /*background-color: rgba(255, 0, 0, 0.5);*/
     width: 326px;
     height: 33px;
-    /*position: relative;*/
     top: 81px;
     left: 21px;
 }
 
 #adro {
-    /*background-color: rgba(255, 0, 0, 0.5);*/
     width: 326px;
     height: 33px;
-    /*position: relative;*/
     top: 156px;
     left: 20.2px;
 }
@@ -324,16 +315,13 @@ button:active {
 #consti {
     width: 530px;
     height: 31px;
-    /*position: relative;*/
     top: 157px;
     left: 371.7px;
-    /*background-color: rgba(255, 0, 0, 0.5);*/
 }
 
 #consti .cuadrado{
     width: 31px;
     margin-right: 27.5px;
-    /*height: 28px;*/
 }
 
 #consti .circulo {
@@ -361,7 +349,6 @@ button:active {
     border-radius: 20px;
     width: auto;
     height: 33px;
-    /*background-color: rgba(0, 255, 0, 0.5);*/
 
     position: relative;
     width: 32px;

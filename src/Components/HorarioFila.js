@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
-import { Table } from 'semantic-ui-react'
-
+// import { Table } from 'semantic-ui-react'
+import {
+  TableRow,
+  TableRowColumn,
+} from 'material-ui/Table';
 class HorarioFila extends Component{
     getTimeRemaining(ahora,salida){
         var minAhora = parseInt(ahora.slice(0,ahora.indexOf(":")))*60 + parseInt(ahora.slice(ahora.indexOf(":")+1));
@@ -16,7 +19,7 @@ class HorarioFila extends Component{
             var minutos = (24*60 - (minAhora - minSalida))%60;
             resultado = horas + ((horas == 1)?(" hora "):(" horas ")) + minutos + (( minutos == 1)?( " minuto"):(" minutos"));
             // var style = { color: 'red'};
-            return <Table.Cell error>{resultado} <i className="hourglass start icon"></i></Table.Cell>;
+            return <TableRowColumn error>{resultado} <i className="hourglass start icon"></i></TableRowColumn>;
             // TODO AGREGAR ESTILO ROJO
         } else {
             var minutos = resultado;
@@ -24,20 +27,20 @@ class HorarioFila extends Component{
             if (minutos < 10){
                 // resultado = resultado + ((minutos < 10)?("! &#127939;"):(""));
                 // TODO SACAR ESTE ICONO Y PONER DE SEMANTIC
-                return <Table.Cell>{resultado} &#127939; </Table.Cell>
+                return <TableRowColumn>{resultado} &#127939; </TableRowColumn>
             }
-            return <Table.Cell>{resultado}</Table.Cell>;
+            return <TableRowColumn>{resultado}</TableRowColumn>;
         }
     }
 
     render(){
         let tiempo = this.getTimeRemaining(this.props.ahora, this.props.salida);
         return (
-            <Table.Row>
-              {tiempo}
-              <Table.Cell>{this.props.salida}</Table.Cell>
-              <Table.Cell>{this.props.llegada}</Table.Cell>
-            </Table.Row>
+          <TableRow>
+            {tiempo}
+            <TableRowColumn>{this.props.salida}</TableRowColumn>
+            <TableRowColumn>{this.props.llegada}</TableRowColumn>
+          </TableRow>
         );
     }
 }

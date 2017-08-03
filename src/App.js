@@ -1,11 +1,24 @@
 import React, { Component } from 'react';
-import { Button, Popup } from 'semantic-ui-react';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import lightBaseTheme from 'material-ui/styles/baseThemes/lightBaseTheme';
+import darkBaseTheme from 'material-ui/styles/baseThemes/darkBaseTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import AppBar from 'material-ui/AppBar';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import ContentAdd from 'material-ui/svg-icons/content/add';
+// import { Button, Popup } from 'semantic-ui-react';
 import logo from './logo.svg';
 import './App.css';
 import ModalMap from './Components/ModalMap';
 import Horarios from './Components/Horarios';
 import Reloj from './Components/Reloj';
 import uuid from 'uuid';
+injectTapEventPlugin();
+
+
+
+
 
 // TODO tengo que ver como hacer para solo tener horarios origenDestino concat y ver si no puedo directamente
 // iterar el lcoalstorage o no se
@@ -27,6 +40,8 @@ class App extends Component {
               id: uuid.v4()
             });
         }
+      } else {
+        localStorage.recorridos = 0;
       }
     }
 
@@ -53,10 +68,12 @@ class App extends Component {
     let index = horarios.findIndex(x => x.id === id);
     horarios.splice(index, 1);
     this.setState({horarios: horarios});
-    // TODO tengo que ver como carajo borrar esto
+
+    // TODO copiarme metodo anterior? recorrer usando recorridos los recorridos posibles y de ahi fijarme cual borre y como subir
   }
 
   handleNuevoRecorrido(origen, destino){
+      console.log("se registra un nuevo recorrido");
       let nuevoHorarios = this.state.horarios;
       nuevoHorarios.push({
           origen: origen,
@@ -100,16 +117,21 @@ class App extends Component {
   }
 
   render() {
+    const watchStyle = {    fontSize: 65,
+        textAlign: "center",
+        margin: 20}
     return (
-      <div className="ui container">
-        <Reloj hora={this.state.hora}/>
+      <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
+    <div>
+        <AppBar title={this.state.hora} titleStyle={watchStyle}>
+        </AppBar>
         <Horarios horarios={this.state.horarios} onDelete={this.handleDeleteHorario.bind(this)} hora={this.state.hora}/>
-        <Popup
-          trigger={<Button fluid icon='add' onClick={this.handlePlusButton.bind(this)}/>}
-          content='Agregá un nuevo recorrido'
-        />
+
+
         <ModalMap onNuevo={this.handleNuevoRecorrido.bind(this)} open={this.state.showModal} close={this.closeModal.bind(this)}/>
+
       </div>
+       </MuiThemeProvider>
     );
   }
 
