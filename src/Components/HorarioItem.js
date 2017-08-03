@@ -149,8 +149,8 @@ class HorarioItem extends Component {
         $.ajax({
             data: { "desde": desde, "hasta": hasta, "tabla": recorrido },
             // TODO cambiar esto por solo accederdb en produccion
-            url: 'http://horarios.webutu.com/accederdbReact.php',
-            // url: 'accederdb.php',
+            // url: 'http://horarios.webutu.com/accederdbReact.php',
+            url: 'accederdb.php',
             dataType: 'json',
             success: ajaxSuccess,
             error: function(jqXHR, textStatus, errorThrown) {
