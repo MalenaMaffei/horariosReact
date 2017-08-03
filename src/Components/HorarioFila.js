@@ -18,8 +18,8 @@ class HorarioFila extends Component{
             var horas = Math.floor(resultado/60);
             var minutos = (24*60 - (minAhora - minSalida))%60;
             resultado = horas + ((horas == 1)?(" hora "):(" horas ")) + minutos + (( minutos == 1)?( " minuto"):(" minutos"));
-            // var style = { color: 'red'};
-            return <TableRowColumn error>{resultado} <i className="hourglass start icon"></i></TableRowColumn>;
+            var style = { color: 'red'};
+            return <TableRowColumn style={style}>{resultado} <i className="hourglass start icon"></i></TableRowColumn>;
             // TODO AGREGAR ESTILO ROJO
         } else {
             var minutos = resultado;

@@ -4,6 +4,10 @@ body {
     font-family: 'Roboto', sans-serif;
 }
 
+td, th {
+    text-align: center !important;
+}
+
 
 /*
 #contenido {

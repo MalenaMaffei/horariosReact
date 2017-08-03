@@ -177,48 +177,28 @@ class HorarioItem extends Component {
                 );
             });
         }
-        // var style = { backgroundColor: this.props.color !important};
+        var style = { backgroundColor: this.props.color};
         return (
         <div>
 			<Table>
-				<TableHeader displaySelectAll={false}>
+				<TableHeader displaySelectAll={false} style={style}>
 					<TableRow>
-		              <TableHeaderColumn colSpan="3" tooltip="Super Header" style={{textAlign: 'center'}}>
+		              <TableHeaderColumn colSpan="3"  style={{color: 'black'}}>
+					  	<h5>
 		                { this.props.horario.origen } - {this.props.horario.destino }
+						</h5>
 		              </TableHeaderColumn>
 		            </TableRow>
-					<TableRow>
-						<TableHeaderColumn>Sale en</TableHeaderColumn>
-						<TableHeaderColumn>A las</TableHeaderColumn>
-						<TableHeaderColumn>Llega</TableHeaderColumn>
+					<TableRow >
+						<TableHeaderColumn style={{color: 'black', fontWeight: 'bold'}}>Sale en</TableHeaderColumn>
+						<TableHeaderColumn style={{color: 'black', fontWeight: 'bold'}}>A las</TableHeaderColumn>
+						<TableHeaderColumn style={{color: 'black', fontWeight: 'bold'}}>Llega</TableHeaderColumn>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
 					{trenes}
 				</TableBody>
 			</Table>
-            {/*<Table color = { this.props.color } celled inverted unstackable striped>
-                <Table.Header>
-                    <Table.Row>
-                        <Table.HeaderCell className = "center aligned" colSpan = "3" scope = "colgroup">
-                            { this.props.horario.origen } - { this.props.horario.destino }
-                            <button className = "ui icon button trash" onClick = { this.deleteHorario.bind(this, this.props.horario.id) }>
-                                <i className = "trash icon" aria-hidden = "true"> </i>
-                            </button>
-                        </Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-
-                <Table.Header>
-                    <Table.Row>
-                    <Table.HeaderCell> Sale en </Table.HeaderCell>
-                    <Table.HeaderCell> A las </Table.HeaderCell>
-                    <Table.HeaderCell> Llega </Table.HeaderCell>
-                    </Table.Row>
-                </Table.Header>
-
-                <Table.Body> { trenes } </Table.Body>
-            </Table>*/}
             {/*<div id = "centeredmenu" >
                 <ul className = "tab tabsHorarios" >
                     <li > < a className = "tabHorario" > 0: 00 - 9: 00 </a></li>

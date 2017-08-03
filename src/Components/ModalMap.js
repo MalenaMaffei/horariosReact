@@ -93,7 +93,7 @@ class ModalMap extends Component{
     ];
 		return (
             <div>
-                <FloatingActionButton  onTouchTap={this.handleOpen}>
+                <FloatingActionButton  onTouchTap={this.handleOpen} tooltip="Agregar Horarios">
                     <ContentAdd />
                 </FloatingActionButton>
                 <Dialog

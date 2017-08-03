@@ -3,8 +3,9 @@ import HorarioItem from './HorarioItem';
 // import { Tab } from 'semantic-ui-react'
 import SwipeableViews from 'react-swipeable-views';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import * as palette from 'material-ui/styles/colors.js'
 const colors = [
-  'teal', 'blue', 'violet', 'purple', 'pink', 'brown', 'orange', 'yellow', 'olive','green',
+  palette.teal300, palette.blue300, palette.purple300, palette.pink300, palette.indigo300, palette.green300, palette.cyan300, palette.lime300
 ];
 // TODO: flechita para pasar de 3 a 4-5 horarios?
 class Horarios extends Component{
