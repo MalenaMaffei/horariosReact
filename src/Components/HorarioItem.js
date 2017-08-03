@@ -3,6 +3,7 @@ import $ from 'jquery';
 import * as maestro from '../maestros.js';
 import * as aux from '../auxiliares.js';
 import HorarioFila from './HorarioFila';
+
 // import { Table, Icon } from 'semantic-ui-react'
 import {
   Table,

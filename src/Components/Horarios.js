@@ -3,6 +3,8 @@ import HorarioItem from './HorarioItem';
 // import { Tab } from 'semantic-ui-react'
 import SwipeableViews from 'react-swipeable-views';
 import {Tabs, Tab} from 'material-ui/Tabs';
+import ActionFlightTakeoff from 'material-ui/svg-icons/action/flight-takeoff';
+import ActionFlightLand from 'material-ui/svg-icons/action/flight-land';
 import * as palette from 'material-ui/styles/colors.js'
 const colors = [
   palette.teal300, palette.blue300, palette.purple300, palette.pink300, palette.indigo300, palette.green300, palette.cyan300, palette.lime300
@@ -62,8 +64,8 @@ class Horarios extends Component{
               onChange={this.handleChange}
               value={this.state.slideIndex}
             >
-              <Tab label="IDA" value={0} />
-              <Tab label="VUELTA" value={1} />
+              <Tab label="IDA" icon={<ActionFlightTakeoff />} value={0} />
+              <Tab label="VUELTA" icon={<ActionFlightLand />} value={1} />
             </Tabs>
             <SwipeableViews
               index={this.state.slideIndex}
