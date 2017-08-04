@@ -8,6 +8,9 @@ td, th {
     text-align: center !important;
 }
 
+.tablaHorario{
+    margin-top: 10px;
+}
 
 /*
 #contenido {

@@ -150,7 +150,8 @@ class HorarioItem extends Component {
             data: { "desde": desde, "hasta": hasta, "tabla": recorrido },
             // TODO cambiar esto por solo accederdb en produccion
             // url: 'http://horarios.webutu.com/accederdbReact.php',
-            url: 'accederdb.php',
+            //url: 'accederdb.php',
+            url: 'http://horarios.webutu.com/accederdb.php',
             dataType: 'json',
             success: ajaxSuccess,
             error: function(jqXHR, textStatus, errorThrown) {
@@ -179,10 +180,11 @@ class HorarioItem extends Component {
             });
         }
         var style = { backgroundColor: this.props.color};
+        //TODO ponerle clase a la tabla, no se porque me toma a los rows como otra tabla... ver que onda
         return (
         <div>
 			<Table>
-				<TableHeader displaySelectAll={false} style={style}>
+				<TableHeader adjustForCheckbox={false} className='tablaHorario' displaySelectAll={false} style={style}>
 					<TableRow>
 		              <TableHeaderColumn colSpan="3"  style={{color: 'black'}}>
 					  	<h5>
