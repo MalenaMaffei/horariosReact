@@ -16,9 +16,9 @@ import Reloj from './Components/Reloj';
 import uuid from 'uuid';
 injectTapEventPlugin();
 
+// TODO USAR JSON STRINGIFY  Y TENER UN ARRAY DE TUPLAS DESTINO-ORIGEN DEL LARGO DE RECORRIDOS
 
-
-
+// TODO: que se de cuenta cuando hay un feriado, creo que se puede obtener un json file con los feriados del anio. Por ahi es mas facil que me acuerde de descargar una cada anio.
 
 // TODO tengo que ver como hacer para solo tener horarios origenDestino concat y ver si no puedo directamente
 // iterar el lcoalstorage o no se
@@ -63,13 +63,15 @@ class App extends Component {
   }
 
   handleDeleteHorario(id){
-    console.log("voy a borrar a alguien");
-    let horarios = this.state.horarios;
-    let index = horarios.findIndex(x => x.id === id);
-    horarios.splice(index, 1);
-    this.setState({horarios: horarios});
+    // console.log("voy a borrar a alguien");
+    // let horarios = this.state.horarios;
+    // let index = horarios.findIndex(x => x.id === id);
+    // horarios.splice(index, 1);
+    // this.setState({horarios: horarios});
 
     // TODO copiarme metodo anterior? recorrer usando recorridos los recorridos posibles y de ahi fijarme cual borre y como subir
+
+    console.log("Borrando horario con id: "+id);
   }
 
   handleNuevoRecorrido(origen, destino){
@@ -123,7 +125,7 @@ class App extends Component {
     return (
       <MuiThemeProvider muiTheme={getMuiTheme(lightBaseTheme)}>
     <div>
-        <AppBar title={this.state.hora} titleStyle={watchStyle}>
+        <AppBar title={this.state.hora} titleStyle={watchStyle} showMenuIconButton={false}>
         </AppBar>
         <Horarios horarios={this.state.horarios} onDelete={this.handleDeleteHorario.bind(this)} hora={this.state.hora}/>
 

@@ -3,7 +3,10 @@ import $ from 'jquery';
 import * as maestro from '../maestros.js';
 import * as aux from '../auxiliares.js';
 import HorarioFila from './HorarioFila';
-
+import AppBar from 'material-ui/AppBar';
+import HorarioMenu from './HorarioMenu';
+// import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+// import IconButton from 'material-ui/IconButton';
 // import { Table, Icon } from 'semantic-ui-react'
 import {
   Table,
@@ -38,7 +41,7 @@ class HorarioItem extends Component {
     componentWillReceiveProps(nextProps) {
         if (nextProps.hora === "0:00") {
             this.arrancarTodo(this.props.horario.origen, this.props.horario.destino)
-        } else if (nextProps.direccion === 0) {
+        } else if (nextProps.direccion === maestro.IDA) {
             this.buscarTrenes(this.state.horariosIda, nextProps.hora);
         } else {
             this.buscarTrenes(this.state.horariosVuelta, nextProps.hora);
@@ -145,6 +148,9 @@ class HorarioItem extends Component {
     }
 
     traerDeDB(desde, hasta, recorrido) {
+        //TODO se hacen dos llamadas a la db... sera por receive props y ctror?
+        // me parece que se hace otra llamada cuando pasa un minuto...
+        // poner condicion de fail
         var ajaxSuccess = this.ajaxSuccess;
         $.ajax({
             data: { "desde": desde, "hasta": hasta, "tabla": recorrido },
@@ -160,7 +166,6 @@ class HorarioItem extends Component {
                 console.log(errorThrown);
             }
         });
-        // return mydata;
     }
 
     deleteHorario(id) {
@@ -180,18 +185,19 @@ class HorarioItem extends Component {
             });
         }
         var style = { backgroundColor: this.props.color};
-        //TODO ponerle clase a la tabla, no se porque me toma a los rows como otra tabla... ver que onda
+        // TODO: React DnD para poder ordenar los horarios, agregar en el menu: eliminar horario y ver todos los horarios para este recorrido -> popup gigante con pestanas para buscar por horario, seguramente me tendria que dejar elegir el dia de la semana.
+        var titulo = this.props.direccion === maestro.IDA ? (this.props.horario.origen +" - " + this.props.horario.destino) : (this.props.horario.destino +" - " + this.props.horario.origen) ;
         return (
-        <div>
-			<Table>
-				<TableHeader adjustForCheckbox={false} className='tablaHorario' displaySelectAll={false} style={style}>
-					<TableRow>
-		              <TableHeaderColumn colSpan="3"  style={{color: 'black'}}>
-					  	<h5>
-		                { this.props.horario.origen } - {this.props.horario.destino }
-						</h5>
-		              </TableHeaderColumn>
-		            </TableRow>
+        <div className='tablaHorario'>
+        <AppBar
+          title={titulo}
+          titleStyle={{textAlign: "center"}}
+          style={style}
+          iconElementRight={ <HorarioMenu onDelete={this.deleteHorario.bind(this, this.props.horario.id)}/>}
+          zDepth={0}
+        />
+			<Table >
+				<TableHeader adjustForCheckbox={false}  displaySelectAll={false} style={style}>
 					<TableRow >
 						<TableHeaderColumn style={{color: 'black', fontWeight: 'bold'}}>Sale en</TableHeaderColumn>
 						<TableHeaderColumn style={{color: 'black', fontWeight: 'bold'}}>A las</TableHeaderColumn>

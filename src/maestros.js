@@ -1,5 +1,7 @@
 export var SALIDA = 0;
 export var LLEGADA = 1;
+export var IDA = 0;
+export var VUELTA = 1;
 var REDFLAG = 0;
 var CANT_BOTONES = 3;
 var CANT_HEADERS = 2;

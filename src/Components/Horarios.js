@@ -44,11 +44,11 @@ class Horarios extends Component{
             console.log(this.props.horarios);
             horarioItems = this.props.horarios.map((horario, index) => {
                 return (<HorarioItem onDelete={this.deleteHorario.bind(this)}
-                                    key={horario.id}
-                                    horario={horario}
-                                    hora={this.props.hora}
-                                    direccion={this.state.slideIndex}
-                                    color={colors[index%colors.length]}
+                            key={horario.id}
+                            horario={horario}
+                            hora={this.props.hora}
+                            direccion={this.state.slideIndex}
+                            color={colors[index%colors.length]}
                         />
                 );
             });
@@ -56,7 +56,6 @@ class Horarios extends Component{
         else {
           horarioItems = <h3>Agrega Horarios!</h3>;
         }
-
 
         return (
           <div>
@@ -81,15 +80,6 @@ class Horarios extends Component{
             </SwipeableViews>
           </div>
         );
-
-        // const panes = [
-        //     { menuItem: 'IDA', render: () => <Tab.Pane className="tabcontent">{horarioItems}</Tab.Pane> },
-        //     { menuItem: 'VUELTA', render: () => <Tab.Pane className="tabcontent">{horarioItems}</Tab.Pane> }
-        // ];
-        //
-        // return (
-        //   <Tab className="fluid" panes={panes} onTabChange={this.handleChange.bind(this)}/>
-        // );
     }
 }
 
