@@ -16,39 +16,41 @@ import Reloj from './Components/Reloj';
 import uuid from 'uuid';
 injectTapEventPlugin();
 
-// TODO USAR JSON STRINGIFY  Y TENER UN ARRAY DE TUPLAS DESTINO-ORIGEN DEL LARGO DE RECORRIDOS
+// TODO: No seria mejor guardar el mismo objeto que despues guardo en el estado en vez de un array? seguramente se facilite borrar y agregar:s
+
+
 
 // TODO: que se de cuenta cuando hay un feriado, creo que se puede obtener un json file con los feriados del anio. Por ahi es mas facil que me acuerde de descargar una cada anio.
 
-// TODO tengo que ver como hacer para solo tener horarios origenDestino concat y ver si no puedo directamente
-// iterar el lcoalstorage o no se
 // TODO: Revisar Delete que no estaria funcionando.
 class App extends Component {
   constructor(props){
     super(props);
     let horarios = [];
-    // TODO cuando borro recorridos teng
+    var cantRecorridos = 0;
     if(typeof(Storage) !== "undefined") {
-      if (localStorage.recorridos) {
-          // console.log(localStorage.recorridos);
-          var recorridosGuardados = localStorage.recorridos;
-          for (var nro = 1; nro <= recorridosGuardados; nro++) {
+      if (localStorage.recorridos && localStorage.recList) {
+          cantRecorridos = localStorage.recorridos;
+          var listaRecorridos = JSON.parse(localStorage.recList);
+          for (var nro = 0; nro < cantRecorridos; nro++) {
             horarios.push({
-                // TODO por aca tengo que comprobar que existan esos, si no, pongo los recorridos en 0 y vuelvo a empezar
-              origen: localStorage[nro+'Ida'],
-              destino: localStorage[nro+'Vuelta'],
+              origen: listaRecorridos[nro][0],
+              destino: listaRecorridos[nro][1],
               id: uuid.v4()
             });
-        }
+          }
       } else {
-        localStorage.recorridos = 0;
+        var lista = [];
+        localStorage.recorridos = cantRecorridos;
+        localStorage.recList = JSON.stringify(lista);
       }
     }
-
+    console.log("lo que guardo en app.js");
+    console.log(horarios);
     this.state = {
       showModal: false,
       horarios: horarios,
-      cantHorarios: recorridosGuardados,
+      cantHorarios: cantRecorridos,
       hora: this.getHora()
     }
   }
@@ -90,9 +92,12 @@ class App extends Component {
       });
       if(typeof(Storage) !== "undefined") {
         localStorage.recorridos++;
-        var nro = localStorage.recorridos;
-        localStorage[nro+'Ida'] = origen;
-        localStorage[nro+'Vuelta'] = destino;
+        // var nro = localStorage.recorridos;
+        // localStorage[nro+'Ida'] = origen;
+        // localStorage[nro+'Vuelta'] = destino;
+        var recList = JSON.parse(localStorage.recList);
+        recList.push([origen, destino]);
+        localStorage.recList = JSON.stringify(recList);
       }
   }
 
