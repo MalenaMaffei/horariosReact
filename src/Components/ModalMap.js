@@ -29,6 +29,10 @@ class ModalMap extends Component{
 
     };
 
+    handleClose = () => {
+    this.setState({open: false});
+    };
+
     handleNext = () => {
       const {stepIndex} = this.state;
       this.setState({
@@ -97,6 +101,7 @@ class ModalMap extends Component{
                     <ContentAdd />
                 </FloatingActionButton>
                 <Dialog
+                  autoScrollBodyContent={true}
                   title="Elegí las estaciones de origen y destino"
                   actions={actions}
                   modal={false}

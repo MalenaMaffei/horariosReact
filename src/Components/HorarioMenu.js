@@ -4,6 +4,7 @@ import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 import DeleteIcon from 'material-ui/svg-icons/action/delete';
+import Expand from 'material-ui/svg-icons/navigation/expand-more';
 
 class HorarioMenu extends Component {
   handleMenuSelection(){
@@ -23,8 +24,8 @@ class HorarioMenu extends Component {
         // onItemTouchTap={this.props.onDelete}
         // onItemTouchTap={this.handleMenuSelection.bind(this)}
       >
-        <MenuItem primaryText="Ver horario completo" />
-        <MenuItem primaryText="Eliminar" leftIcon={<DeleteIcon />} onTouchTap={this.props.onDelete} />
+        <MenuItem primaryText="Ver horario completo" rightIcon={<Expand/>} onTouchTap={this.props.onSeeMore}/>
+        <MenuItem primaryText="Eliminar" rightIcon={<DeleteIcon />} onTouchTap={this.props.onDelete} />
       </IconMenu>
     );
   }

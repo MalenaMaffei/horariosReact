@@ -12,7 +12,7 @@ var horariosHash = {};
 horariosHash["Ida"] = [];
 horariosHash["Vuelta"] =[];
 
-var displayNames = {};
+export var displayNames = {};
 displayNames["ADROGUE"] = "ADROGUE";
 displayNames["BANFIELD"] = "BANFIELD";
 displayNames["BURZACO"] = "BURZACO";

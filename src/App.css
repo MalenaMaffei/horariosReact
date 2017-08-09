@@ -12,6 +12,10 @@ td, th {
     margin-top: 20px;
 }
 
+.tabs {
+    background-color: rgba(206, 232, 254,0.5);
+}
+
 /*
 #contenido {
     max-width: 1500px;

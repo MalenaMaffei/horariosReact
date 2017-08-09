@@ -5,9 +5,8 @@ import * as aux from '../auxiliares.js';
 import HorarioFila from './HorarioFila';
 import AppBar from 'material-ui/AppBar';
 import HorarioMenu from './HorarioMenu';
-// import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-// import IconButton from 'material-ui/IconButton';
-// import { Table, Icon } from 'semantic-ui-react'
+import HorarioEntero from './HorarioEntero';
+import Dialog from 'material-ui/Dialog';
 import {
   Table,
   TableBody,
@@ -16,6 +15,7 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
+
 class HorarioItem extends Component {
     constructor(props) {
         super(props);
@@ -25,13 +25,15 @@ class HorarioItem extends Component {
             horariosIda: [],
             horariosVuelta: [],
             trenes: [],
-            dia: ""
+            dia: "",
+            diagOpen: false
         }
         this.traerDeDB = this.traerDeDB.bind(this);
         this.ajaxSuccess = this.ajaxSuccess.bind(this);
         this.buscarTrenes = this.buscarTrenes.bind(this);
-        console.log("el indice qe me viene al comienzo: ");
-        console.log(this.props.direccion);
+        this.handleOpen = this.handleOpen.bind(this);
+        // console.log("el indice qe me viene al comienzo: ");
+        // console.log(this.props.direccion);
     }
 
     componentDidMount() {
@@ -67,8 +69,8 @@ class HorarioItem extends Component {
         var horariosVuelta = [];
 
         var recorridos = maestro.getRecorridos(ida, vuelta, dia);
-        console.log("lo qe devuelve recorridos");
-        console.log(recorridos);
+        // console.log("lo qe devuelve recorridos");
+        // console.log(recorridos);
 
         for (var i = 0; i < recorridos.length; i++) {
             var direccion = recorridos[i];
@@ -85,9 +87,9 @@ class HorarioItem extends Component {
 
     // TODO buscar trenes solo despues de que el estad
     buscarTrenes(horarios, currentTime) {
-        console.log("entro al puto buscar trenes");
-        console.log(horarios);
-        console.log(currentTime);
+        // console.log("entro al puto buscar trenes");
+        // console.log(horarios);
+        // console.log(currentTime);
         if(horarios.length < 1){
             return;
         }
@@ -100,8 +102,8 @@ class HorarioItem extends Component {
             trenes.push({ salida: salida, llegada: llegada });
             nextTrain = aux.getNext(horarios, nextTrain[aux.SALIDA]);
         }
-        console.log("los trenes son: ");
-        console.log(trenes);
+        // console.log("los trenes son: ");
+        // console.log(trenes);
         this.setState({ trenes: trenes });
     }
 
@@ -119,8 +121,8 @@ class HorarioItem extends Component {
     }
 
     ajaxSuccess(data) {
-        console.log("lo que recibo de ajax");
-        console.log(data);
+        // console.log("lo que recibo de ajax");
+        // console.log(data);
         // console.log("puedo acceder a mi estado?");
         // console.log(this.state);
         let desde = data[maestro.SALIDA];
@@ -128,15 +130,15 @@ class HorarioItem extends Component {
         var currData;
 
         var horariosIda = this.loopHorarios(data, maestro.SALIDA, desde, hasta);
-        console.log("horarios ida que vienen de loop horarios");
-        console.log(horariosIda);
+        // console.log("horarios ida que vienen de loop horarios");
+        // console.log(horariosIda);
         let misHorarios;
         misHorarios = this.state.horariosIda;
         misHorarios = misHorarios.concat(horariosIda);
         misHorarios = misHorarios.sort(aux.ordenarArraysDeHorarios);
         this.setState({ horariosIda: misHorarios });
-        console.log("los horarios uqee le voy a pasar a biscar trenes");
-        console.log(misHorarios);
+        // console.log("los horarios uqee le voy a pasar a biscar trenes");
+        // console.log(misHorarios);
         this.buscarTrenes(misHorarios, this.props.hora);
 
         var horariosVuelta = this.loopHorarios(data, maestro.LLEGADA, hasta, desde);
@@ -172,6 +174,14 @@ class HorarioItem extends Component {
         this.props.onDelete(id);
     }
 
+    handleOpen = () => {
+        this.setState({diagOpen: true});
+    };
+
+    handleClose = () => {
+        this.setState({diagOpen: false});
+    };
+
     render() {
         let trenes;
         if (this.state.trenes) {
@@ -184,38 +194,47 @@ class HorarioItem extends Component {
                 );
             });
         }
+
         var style = { backgroundColor: this.props.color};
         // TODO: React DnD para poder ordenar los horarios, agregar en el menu: eliminar horario y ver todos los horarios para este recorrido -> popup gigante con pestanas para buscar por horario, seguramente me tendria que dejar elegir el dia de la semana.
-        var titulo = this.props.direccion === maestro.IDA ? (this.props.horario.origen +" - " + this.props.horario.destino) : (this.props.horario.destino +" - " + this.props.horario.origen) ;
+        var origen = maestro.displayNames[this.props.horario.origen];
+        var destino = maestro.displayNames[this.props.horario.destino];
+        var titulo = this.props.direccion === maestro.IDA ? (origen +" - " + destino) : (destino +" - " + origen) ;
+
         return (
         <div className='tablaHorario'>
-        <AppBar
-          title={titulo}
-          titleStyle={{textAlign: "center"}}
-          style={style}
-          iconElementRight={ <HorarioMenu onDelete={this.deleteHorario.bind(this, this.props.horario.id)}/>}
-          zDepth={0}
-        />
-			<Table >
-				<TableHeader adjustForCheckbox={false}  displaySelectAll={false} style={style}>
-					<TableRow >
-						<TableHeaderColumn style={{color: 'black', fontWeight: 'bold'}}>Sale en</TableHeaderColumn>
-						<TableHeaderColumn style={{color: 'black', fontWeight: 'bold'}}>A las</TableHeaderColumn>
-						<TableHeaderColumn style={{color: 'black', fontWeight: 'bold'}}>Llega</TableHeaderColumn>
-					</TableRow>
-				</TableHeader>
-				<TableBody>
-					{trenes}
-				</TableBody>
-			</Table>
-            {/*<div id = "centeredmenu" >
-                <ul className = "tab tabsHorarios" >
-                    <li > < a className = "tabHorario" > 0: 00 - 9: 00 </a></li>
-                    <li > < a className = "tabHorario" > 9: 00 - 13: 00 </a></li>
-                    <li > < a className = "tabHorario" > 13: 00 - 18: 00 </a></li>
-                    <li > < a className = "tabHorario" > 18: 00 - 0: 00 </a></li>
-                </ul>
-            </div>*/}
+          <AppBar
+            title={titulo}
+            titleStyle={{textAlign: "center"}}
+            style={style}
+            iconElementRight={ <HorarioMenu onDelete={this.deleteHorario.bind(this, this.props.horario.id)} onSeeMore={this.handleOpen}/>}
+            zDepth={0}
+          />
+    			<Table >
+    				<TableHeader adjustForCheckbox={false}  displaySelectAll={false} style={style}>
+    					<TableRow >
+    						<TableHeaderColumn style={{color: 'black', fontWeight: 'bold'}}>Sale en</TableHeaderColumn>
+    						<TableHeaderColumn style={{color: 'black', fontWeight: 'bold'}}>A las</TableHeaderColumn>
+    						<TableHeaderColumn style={{color: 'black', fontWeight: 'bold'}}>Llega</TableHeaderColumn>
+    					</TableRow>
+    				</TableHeader>
+    				<TableBody>
+    					{trenes}
+    				</TableBody>
+    			</Table>
+          <Dialog
+            title={"Horarios del recorrido " + titulo}
+            modal={false}
+            open={this.state.diagOpen}
+            onRequestClose={this.handleClose}
+            contentStyle={{width: '100%',
+                          maxWidth: 'none',}}
+            autoScrollBodyContent={true}
+            titleStyle={{textDecoration: 'underline',
+    textDecorationColor:this.props.color}}
+          >
+            <HorarioEntero color={this.props.color} horarios={this.props.direccion === maestro.IDA ? (this.state.horariosIda):(this.state.horariosVuelta)}/>
+          </Dialog>
         </div>
         );
     }

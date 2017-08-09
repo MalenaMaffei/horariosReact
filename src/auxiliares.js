@@ -35,7 +35,7 @@ function esHoraMenor(hora1, hora2) {
     return Date.parse('01/01/2011 ' + hora1) < Date.parse('01/01/2011 ' + hora2);
 }
 
-function buscarIndices(horaDesde, horaHasta, horarios) {
+export function buscarIndices(horaDesde, horaHasta, horarios) {
     var desde;
     var hasta;
     for (var i = 0; i < horarios.length; i++) {

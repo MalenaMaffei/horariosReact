@@ -7,7 +7,6 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import AppBar from 'material-ui/AppBar';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
-// import { Button, Popup } from 'semantic-ui-react';
 import logo from './logo.svg';
 import './App.css';
 import ModalMap from './Components/ModalMap';
@@ -15,10 +14,6 @@ import Horarios from './Components/Horarios';
 import Reloj from './Components/Reloj';
 import uuid from 'uuid';
 injectTapEventPlugin();
-
-// TODO: No seria mejor guardar el mismo objeto que despues guardo en el estado en vez de un array? seguramente se facilite borrar y agregar:s
-
-
 
 // TODO: que se de cuenta cuando hay un feriado, creo que se puede obtener un json file con los feriados del anio. Por ahi es mas facil que me acuerde de descargar una cada anio.
 
@@ -33,11 +28,7 @@ class App extends Component {
           cantRecorridos = localStorage.recorridos;
           var listaRecorridos = JSON.parse(localStorage.recList);
           for (var nro = 0; nro < cantRecorridos; nro++) {
-            horarios.push({
-              origen: listaRecorridos[nro][0],
-              destino: listaRecorridos[nro][1],
-              id: uuid.v4()
-            });
+            horarios.push(listaRecorridos[nro]);
           }
       } else {
         var lista = [];
@@ -65,15 +56,12 @@ class App extends Component {
   }
 
   handleDeleteHorario(id){
-    // console.log("voy a borrar a alguien");
-    // let horarios = this.state.horarios;
-    // let index = horarios.findIndex(x => x.id === id);
-    // horarios.splice(index, 1);
-    // this.setState({horarios: horarios});
-
-    // TODO copiarme metodo anterior? recorrer usando recorridos los recorridos posibles y de ahi fijarme cual borre y como subir
-
-    console.log("Borrando horario con id: "+id);
+    let horarios = this.state.horarios;
+    let index = horarios.findIndex(x => x.id === id);
+    horarios.splice(index, 1);
+    this.setState({horarios: horarios});
+    localStorage.recorridos--;
+    localStorage.recList = JSON.stringify(horarios);
   }
 
   handleNuevoRecorrido(origen, destino){
@@ -92,12 +80,7 @@ class App extends Component {
       });
       if(typeof(Storage) !== "undefined") {
         localStorage.recorridos++;
-        // var nro = localStorage.recorridos;
-        // localStorage[nro+'Ida'] = origen;
-        // localStorage[nro+'Vuelta'] = destino;
-        var recList = JSON.parse(localStorage.recList);
-        recList.push([origen, destino]);
-        localStorage.recList = JSON.stringify(recList);
+        localStorage.recList = JSON.stringify(nuevoHorarios);
       }
   }
 
